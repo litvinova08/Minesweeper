@@ -1,8 +1,11 @@
 package minesweeper;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Grid {
 
-	//TBD GENERATE A GRID WITH DIFFERENT NUMBERS OF CELLS
+	// TBD GENERATE A GRID WITH DIFFERENT NUMBERS OF CELLS
 	public char[][] grid = { { 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' },
 			{ 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' }, { 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' },
 			{ 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' }, { 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' },
@@ -18,13 +21,14 @@ public class Grid {
 			System.out.println();
 		}
 	}
-	
+
 	// TBD GENERATE RANDOMLY
-	public String[] getBombs() {
-		String[] bombs = { "00", "06", "21", "31", "36", "49", "70", "74", "97", "99" };
+	public List<String> getBombs() {
+		String[] arr = { "00", "06", "21", "31", "36", "49", "70", "74", "97", "99" };
+		List<String> bombs = Arrays.asList(arr);
 		return bombs;
 	}
-	
+
 	public void updateGrid(String[] coordinates, int numberOfBombs) {
 		int x = Integer.valueOf(coordinates[0]);
 		int y = Integer.valueOf(coordinates[1]);

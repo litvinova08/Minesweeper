@@ -23,30 +23,34 @@ public class Cell {
 		String[] cellsAroundStr = new String[8];
 
 		for (int i = 0; i < cellsAroundInts.length; i++) {
-			
+
 			List<Integer> numbers = Arrays.asList(cellsAroundInts[i]);
-			 String joinedCoordinates = numbers.stream()
-			     .map(el -> el.toString())
-			     .collect(Collectors.joining(""));
+			String joinedCoordinates = numbers.stream().map(el -> el.toString()).collect(Collectors.joining(""));
 
 			cellsAroundStr[i] = joinedCoordinates;
 		}
 		return cellsAroundStr;
 	}
 
-	
-	//to geet a number of bombs around this cell
-	public int getNumberOfBombs(String[] bombs) {
-//		String[] bombs = { "00", "07", "12", "13", "47", "60", "63", "79", "94", "99" };
-		List<String> bombsList = Arrays.asList(bombs);
+	// to get a number of bombs around this cell
+	public int getNumberOfBombs(List<String> bombs) {
+//		List<String> bombsList = Arrays.asList(bombs);
 
 		int counter = 0;
 
 		for (int i = 0; i < this.cellsAround.length; i++) {
-			if (bombsList.contains(this.cellsAround[i])) {
+			if (bombs.contains(this.cellsAround[i])) {
 				counter = counter + 1;
 			}
 		}
 		return counter;
+	}
+
+	// check if the cell has a bomb
+	public boolean hasBomb(List<String> bombs) {
+		String srtCoordinates = String.join("", this.coordinates);
+		if (bombs.contains(srtCoordinates))
+			return true;
+		return false;
 	}
 }
