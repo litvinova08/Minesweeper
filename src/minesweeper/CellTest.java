@@ -17,10 +17,11 @@ class CellTest {
 	@BeforeAll
 	static void create() {
 
-		String[] arr = { "00", "06", "21", "31", "36", "49", "70", "74", "97", "99" };
+
+		String[] arr = { "73", "62", "85", "36", "44", "62", "41", "18", "25", "20" };
 		bombs = Arrays.asList(arr);
-		String column = "0";
-		String row = "0";
+		String column = "4";
+		String row = "4";
 		String[] inputCoordinates = { column, row };
 		cell = new Cell(inputCoordinates);
 	}

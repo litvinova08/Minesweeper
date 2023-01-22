@@ -15,7 +15,7 @@ public class Tracker {
 	}
 	
 	public static void getUpdated(Cell cell) {
-		 
+		decrementCounter();
 	}
 	
 	public static void decrementCounter() {
