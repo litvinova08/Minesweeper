@@ -12,7 +12,7 @@ public class Main {
 		// generate a Grid
 		Grid grid = new Grid();
 		grid.printGrid();
-		
+
 		List<String> bombs = grid.getBombs();
 		System.out.println(bombs);
 
@@ -21,16 +21,16 @@ public class Main {
 
 		while (Tracker.getUncheckedCellsCounter() > 0) {
 
-			System.out.println("Enter column value between 1 and 10");
-			String column = scanner.nextLine();
-			System.out.println("Enter a row value between 1 and 10");
-			String row = scanner.nextLine(); 
-			String[] inputCoordinates = { column, row }; 
-			System.out.println(bombs);
+			System.out.println("Enter a column coordinate: ");
+			String column = Tracker.validateInput(scanner);
+			System.out.println("Enter a row coordinate: ");
+			String row = Tracker.validateInput(scanner);
+			String[] inputCoordinates = { column, row };
+//			System.out.println(bombs);
 
 			// create a cell object for the cell chosen by the user
 			Cell cell = new Cell(inputCoordinates);
-			cell.getCellsAround().stream().forEach(c -> System.out.println(c.toString()));
+//			cell.getCellsAround().stream().forEach(c -> System.out.println(c.toString()));
 
 			if (cell.hasBomb(bombs)) {
 				System.out.println("BOOOM, you failed!");
@@ -41,13 +41,12 @@ public class Main {
 				System.out.println("This cell is surrounded with " + numberOfBombs + " bombs");
 				grid.updateGrid(inputCoordinates, numberOfBombs);
 				Tracker.getUpdated(cell);
-				System.out.println(Tracker.getUncheckedCellsCounter() + " more cells to check");
 			}
 		}
+		if (Tracker.getUncheckedCellsCounter() == 0) {
+			System.out.println("You are a Winner!!!");
+		}
+		
 	}
 
-	private static char[] typeOf(String c) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
