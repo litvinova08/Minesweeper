@@ -1,13 +1,12 @@
 package minesweeper;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Cell {
 
 	public String[] coordinates;
-	public String[] cellsAround;
+	public ArrayList<String> cellsAround;
 
 	public Cell(String[] coordinates) {
 		this.coordinates = coordinates;
@@ -15,38 +14,54 @@ public class Cell {
 	}
 
 	// to generate coordinates of all eight cells around the chosen cell
-	public String[] getCellsAround() {
+	public ArrayList<String> getCellsAround() {
+
+		// get Integersof the chosen cell coordinates
 		int x = Integer.valueOf(this.coordinates[0]);
 		int y = Integer.valueOf(this.coordinates[1]);
-		Integer[][] cellsAroundInts = { { x - 1, y }, { x - 1, y + 1 }, { x, y + 1 }, { x + 1, y + 1 }, { x + 1, y },
+
+		// generate coordinates of eight cells around the chosen cell
+		int[][] cellsAroundInts = { { x - 1, y }, { x - 1, y + 1 }, { x, y + 1 }, { x + 1, y + 1 }, { x + 1, y },
 				{ x + 1, y - 1 }, { x, y - 1 }, { x - 1, y - 1 } };
-		String[] cellsAroundStr = new String[8];
 
-		for (int i = 0; i < cellsAroundInts.length; i++) {
-			
-			List<Integer> numbers = Arrays.asList(cellsAroundInts[i]);
-			 String joinedCoordinates = numbers.stream()
-			     .map(el -> el.toString())
-			     .collect(Collectors.joining(""));
+		// convert 2D array of Interegs to a List of Strings with cells coordinates
+		ArrayList<String> cellsAroundStr = new ArrayList<>();
 
-			cellsAroundStr[i] = joinedCoordinates;
+		for (int[] coordinates : cellsAroundInts) {
+//			String joined = StringUtils.join(ArrayUtils.toObject(intArray), separator); // import is not working..
+			cellsAroundStr.add(String.join("", convertIntArrToString(coordinates)));
 		}
 		return cellsAroundStr;
 	}
 
-	
-	//to geet a number of bombs around this cell
-	public int getNumberOfBombs(String[] bombs) {
-//		String[] bombs = { "00", "07", "12", "13", "47", "60", "63", "79", "94", "99" };
-		List<String> bombsList = Arrays.asList(bombs);
+	public static String convertIntArrToString(int[] intArr) {
+		String rsl = "";
+		for (int i = 0; i < intArr.length; i++) {
+			String temp = Integer.toString(intArr[i]);
+			rsl = rsl + temp;
+		}
+		return rsl;
+	}
 
+	// to get a number of bombs around this cell
+	public int getNumberOfBombs(List<String> bombs) {
+
+		// to count the number of bombs around the chosen cell
 		int counter = 0;
 
-		for (int i = 0; i < this.cellsAround.length; i++) {
-			if (bombsList.contains(this.cellsAround[i])) {
+		for (String cell : cellsAround) {
+			if (bombs.contains(cell)) {
 				counter = counter + 1;
 			}
 		}
 		return counter;
+	}
+
+	// check if the cell has a bomb
+	public boolean hasBomb(List<String> bombs) {
+		String srtCoordinates = String.join("", this.coordinates);
+		if (bombs.contains(srtCoordinates))
+			return true;
+		return false;
 	}
 }

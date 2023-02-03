@@ -1,36 +1,52 @@
 package minesweeper;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		// generateGrid();
+		System.out.println("Let's play Minesweeper!");
+
+		// generate a Grid
 		Grid grid = new Grid();
 		grid.printGrid();
 
-		// generateBombs();
-		String[] bombCoordinates = grid.getBombs();
+		List<String> bombs = grid.getBombs();
+		System.out.println(bombs);
 
 		// createScanner for user input
 		Scanner scanner = new Scanner(System.in);
-//		 grab user input
-		System.out.println("Enter column value");
-		String column = scanner.nextLine(); // it should be a number like 0
-		System.out.println("Enter a row value");
-		String row = scanner.nextLine(); // it should be a number like 0
-		String[] inputCoordinates = { column, row };
 
-		// create a cell object for the cell chosen by the user
-		Cell cell = new Cell(inputCoordinates);
+		while (Tracker.getUncheckedCellsCounter() > 0) {
 
-		// compare cell fields with bombs locations
-		int numberOfBombs = cell.getNumberOfBombs(bombCoordinates);
-		System.out.println("This cell is surrounded with " + numberOfBombs + " bombs");
+			System.out.println("Enter a column coordinate: ");
+			String column = Tracker.validateInput(scanner);
+			System.out.println("Enter a row coordinate: ");
+			String row = Tracker.validateInput(scanner);
+			String[] inputCoordinates = { column, row };
+//			System.out.println(bombs);
 
-		// updateGrid
-		grid.updateGrid(inputCoordinates, numberOfBombs);
+			// create a cell object for the cell chosen by the user
+			Cell cell = new Cell(inputCoordinates);
+//			cell.getCellsAround().stream().forEach(c -> System.out.println(c.toString()));
 
+			if (cell.hasBomb(bombs)) {
+				System.out.println("BOOOM, you failed!");
+				scanner.close();
+				break;
+			} else {
+				int numberOfBombs = cell.getNumberOfBombs(bombs);
+				System.out.println("This cell is surrounded with " + numberOfBombs + " bombs");
+				grid.updateGrid(inputCoordinates, numberOfBombs);
+				Tracker.getUpdated(cell);
+			}
+		}
+		if (Tracker.getUncheckedCellsCounter() == 0) {
+			System.out.println("You are a Winner!!!");
+		}
+		
 	}
+
 }
