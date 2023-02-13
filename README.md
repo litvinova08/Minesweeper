@@ -1,6 +1,7 @@
 # MineSweeper
 
 ![Depfu](https://img.shields.io/depfu/litvinova08/minesweeper)![GitHub issues](https://img.shields.io/github/issues/litvinova08/minesweeper)
+![image](https://user-images.githubusercontent.com/37922356/218347148-d426e8ac-7cd7-4f44-b72e-b34b214cb7e4.png)
 
 ## Description of project (spec / MVP)
 
