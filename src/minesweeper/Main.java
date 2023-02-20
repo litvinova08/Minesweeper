@@ -14,7 +14,6 @@ public class Main {
 		grid.printGrid();
 
 		List<String> bombs = grid.getBombs();
-		System.out.println(bombs);
 
 		// createScanner for user input
 		Scanner scanner = new Scanner(System.in);
