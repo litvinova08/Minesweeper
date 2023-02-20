@@ -16,7 +16,7 @@ public class Cell {
 	// to generate coordinates of all eight cells around the chosen cell
 	public ArrayList<String> getCellsAround() {
 
-		// get Integersof the chosen cell coordinates
+		// get Integers of the chosen cell coordinates
 		int x = Integer.valueOf(this.coordinates[0]);
 		int y = Integer.valueOf(this.coordinates[1]);
 
@@ -28,7 +28,6 @@ public class Cell {
 		ArrayList<String> cellsAroundStr = new ArrayList<>();
 
 		for (int[] coordinates : cellsAroundInts) {
-//			String joined = StringUtils.join(ArrayUtils.toObject(intArray), separator); // import is not working..
 			cellsAroundStr.add(String.join("", convertIntArrToString(coordinates)));
 		}
 		return cellsAroundStr;

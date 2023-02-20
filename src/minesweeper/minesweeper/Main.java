@@ -9,7 +9,6 @@ public class Main {
 
 		System.out.println("Let's play Minesweeper!");
 
-		// generate a Grid
 		Grid grid = new Grid();
 		grid.printGrid();
 
@@ -26,11 +25,9 @@ public class Main {
 			System.out.println("Enter a row coordinate: ");
 			String row = Tracker.validateInput(scanner);
 			String[] inputCoordinates = { column, row };
-//			System.out.println(bombs);
 
 			// create a cell object for the cell chosen by the user
 			Cell cell = new Cell(inputCoordinates);
-//			cell.getCellsAround().stream().forEach(c -> System.out.println(c.toString()));
 
 			if (cell.hasBomb(bombs)) {
 				System.out.println("BOOOM, you failed!");
